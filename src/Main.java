@@ -1,4 +1,5 @@
 import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.Scanner;
 public class Main {
 
     static Scanner s = new Scanner(System.in);
+    private static final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
     static ArrayList<Admin> adminArrayList = new ArrayList<>();
     static ArrayList<Customer> customerArrayList = new ArrayList<>();
@@ -1084,18 +1086,18 @@ public class Main {
 
             // Calculate average revenue in a period of time case
             case 2: {
-                Date startDate = null, endDate = null;
-                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                s.nextLine();
+                Date startDate = getDateInput("Enter start date (dd/MM/yyyy): ");
+                Date endDate;
 
-                try {
-                    s.nextLine();
-                    System.out.println("Enter start date (dd/MM/yyyy): ");
-                    startDate = format.parse(s.nextLine());
+                while (true) {
+                    endDate = getDateInput("Enter end date (dd/MM/yyyy): ");
 
-                    System.out.println("Enter end date (dd/MM/yyyy): ");
-                    endDate = format.parse(s.nextLine());
-                } catch (Exception e) {
-                    System.out.println("Invalid date format. Please enter in dd/MM/yyyy format.");
+                    if (endDate.after(startDate) || endDate.equals(startDate)) {
+                        break;  // Exit the loop if end date is valid
+                    } else {
+                        System.out.println("End date should be equal to or after the start date.");
+                    }
                 }
 
                 double averageRevenue = adminLoggedIn.getAverageRevenue(orderArrayList, startDate, endDate);
@@ -1110,18 +1112,18 @@ public class Main {
 
             // Calculate total revenue in a period of time case
             case 3: {
-                Date startDate = null, endDate = null;
-                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                s.nextLine();
+                Date startDate = getDateInput("Enter start date (dd/MM/yyyy): ");
+                Date endDate;
 
-                try {
-                    s.nextLine();
-                    System.out.println("Enter start date (dd/MM/yyyy): ");
-                    startDate = format.parse(s.nextLine());
+                while (true) {
+                    endDate = getDateInput("Enter end date (dd/MM/yyyy): ");
 
-                    System.out.println("Enter end date (dd/MM/yyyy): ");
-                    endDate = format.parse(s.nextLine());
-                } catch (Exception e) {
-                    System.out.println("Invalid date format. Please enter in dd/MM/yyyy format.");
+                    if (endDate.after(startDate) || endDate.equals(startDate)) {
+                        break;  // Exit the loop if end date is valid
+                    } else {
+                        System.out.println("End date should be equal to or after the start date.");
+                    }
                 }
 
                 double averageRevenue = adminLoggedIn.getTotalRevenue(orderArrayList, startDate, endDate);
@@ -1313,20 +1315,18 @@ public class Main {
             System.out.print("Invalid Input");
         }
 
-        Date startDate = null,
-                endDate = null;
-        SimpleDateFormat format = new SimpleDateFormat ("dd/MM/yyyy");
+        s.nextLine();
+        Date startDate = getDateInput("Enter start date (dd/MM/yyyy): ");
+        Date endDate;
 
-        try {
-            s.nextLine();
-            System.out.println("Enter start date (dd/MM/yyyy):");
-            startDate=format.parse(s.nextLine());
-            System.out.println("Enter end date (dd/MM/yyyy):  ");
-            endDate=format.parse(s.nextLine());
+        while (true) {
+            endDate = getDateInput("Enter end date (dd/MM/yyyy): ");
 
-        } catch (Exception e) {
-            System.out.println("Invalid date format. Please use the format dd/MM/yyyy.");
-            return;
+            if (endDate.after(startDate) || endDate.equals(startDate)) {
+                break;  // Exit the loop if end date is valid
+            } else {
+                System.out.println("End date should be equal to or after the start date.");
+            }
         }
 
 
@@ -1364,5 +1364,143 @@ public class Main {
         }
     }
 
-    public static void sellerViewDataOfOrders(Seller sellerLoggedIn) {}
+    public static void sellerViewDataOfOrders(Seller sellerLoggedIn) {
+        System.out.println("-----------------------------");
+        System.out.println("1) View an Order's details");
+        System.out.println("2) Change an Order's status");
+        System.out.println("3) Calculate Average Revenue over a specific period of time");
+        System.out.println("4) Calculate total Revenue");
+        
+        byte option;
+        while (true) {
+            option = s.nextByte();
+            if (option >= 1 && option <= 4)
+                break;
+            System.out.print("Invalid Input ");
+        }
+
+        switch (option) {
+            // View an Order's details case
+            case 1: {
+                System.out.print("Enter the Order's ID you want to view its details: ");
+                int orderID = s.nextInt();
+
+
+                Order foundOrder = null;
+                for (Order order : orderArrayList) {
+                    if (foundOrder.getOrderID() == order.getOrderID()) {
+                        foundOrder = order;
+                        break;
+                    }
+                }
+
+                if (foundOrder != null) {
+                    sellerLoggedIn.viewOrderDetails(orderArrayList, foundOrder);
+                } else {
+                    System.out.println("Order not found");
+                }
+            }
+                break;
+
+            // Change an Order's status case
+            case 2: {
+                System.out.print("Enter the Order's ID you want to change its status: ");
+                int orderID = s.nextInt();
+
+
+                Order foundOrder = null;
+                for (Order order : orderArrayList) {
+                    if (foundOrder.getOrderID() == order.getOrderID()) {
+                        foundOrder = order;
+                        break;
+                    }
+                }
+
+                if (foundOrder != null) {
+                    System.out.println("Current Order Status for Order with ID: " + foundOrder.getOrderID()
+                            + " : " + foundOrder.getStatus());
+
+                    System.out.println("What would you want to change this order's status into? ");
+                    System.out.println("1) Cancelled");
+                    System.out.println("2) Pending");
+                    System.out.println("3) Delivered");
+
+                    byte orderStatusOption;
+                    while (true) {
+                        orderStatusOption = s.nextByte();
+                        if (orderStatusOption >= 1 && orderStatusOption <= 3)
+                            break;
+                        System.out.print("Invalid Input ");
+                    }
+
+                    OrderStatus orderStatus = null;
+                    switch (orderStatusOption) {
+                        case 1:
+                            orderStatus = OrderStatus.CANCELLED;
+                            sellerLoggedIn.changeOrderStatus(foundOrder, orderStatus);
+                            break;
+                        case 2:
+                            orderStatus = OrderStatus.PENDING;
+                            sellerLoggedIn.changeOrderStatus(foundOrder, orderStatus);
+                            break;
+                        case 3:
+                            orderStatus = OrderStatus.DELIVERED;
+                            sellerLoggedIn.changeOrderStatus(foundOrder, orderStatus);
+                            break;
+                    }
+
+                } else {
+                    System.out.println("Order not found");
+                }
+            }
+
+            // Calculate Average Revenue over a specific period of time case
+                break;
+            case 3: {
+                s.nextLine();
+                Date startDate = getDateInput("Enter start date (dd/MM/yyyy): ");
+                Date endDate;
+
+                while (true) {
+                    endDate = getDateInput("Enter end date (dd/MM/yyyy): ");
+
+                    if (endDate.after(startDate) || endDate.equals(startDate)) {
+                        break;  // Exit the loop if end date is valid
+                    } else {
+                        System.out.println("End date should be equal to or after the start date.");
+                    }
+                }
+
+                double averageRevenue = sellerLoggedIn.calculateAverageRevenue(startDate, endDate);
+
+                System.out.println(sellerLoggedIn.getUserName() + "'s average revenue from "
+                        + startDate + " till " + endDate + " = " + averageRevenue);
+            }
+                break;
+
+            // Calculate total Revenue over a specific period of time case
+            case 4: {
+                double totalRevenue = sellerLoggedIn.calculateTotalRevenue();
+
+                System.out.println(sellerLoggedIn.getUserName() + "'s total revenue " +" = " + totalRevenue);
+            }
+                break;
+
+        }
+    }
+
+    private static Date getDateInput(String prompt) {
+        Date date = null;
+        while (true) {
+            try {
+                System.out.println(prompt);
+                date = format.parse(s.nextLine());
+                break; // Exit the loop if parsing is successful
+            } catch (ParseException e) {
+                System.out.println("Invalid date format. Please use the format dd/MM/yyyy.");
+            }
+        }
+        return date;
+    }
+
 }
