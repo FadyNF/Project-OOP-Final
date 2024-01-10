@@ -1298,7 +1298,71 @@ public class Main {
 
     }
 
-    public static void sellerViewDataOfProducts(Seller sellerLoggedIn) {}
+    public static void sellerViewDataOfProducts(Seller sellerLoggedIn) {
+        System.out.println("-----------------------------");
+        System.out.println("1) View Number of Pieces sold over a specific period of time");
+        System.out.println("2) View Best Seller Products over a specific period of time");
+        System.out.println("3) View Most Revenue Products over a specific period of time");
+        System.out.print("Which would you like to view today? ");
+
+        byte option;
+        while (true) {
+            option = s.nextByte();
+            if (option >= 1 && option <= 3)
+                break;
+            System.out.print("Invalid Input");
+        }
+
+        Date startDate = null,
+                endDate = null;
+        SimpleDateFormat format = new SimpleDateFormat ("dd/MM/yyyy");
+
+        try {
+            s.nextLine();
+            System.out.println("Enter start date (dd/MM/yyyy):");
+            startDate=format.parse(s.nextLine());
+            System.out.println("Enter end date (dd/MM/yyyy):  ");
+            endDate=format.parse(s.nextLine());
+
+        } catch (Exception e) {
+            System.out.println("Invalid date format. Please use the format dd/MM/yyyy.");
+            return;
+        }
+
+
+        switch (option) {
+            // View Number of Pieces sold over time case
+            case 1: {
+                int numberOfPiecesSold = sellerLoggedIn.calculatePiecesSoldOverTime(startDate, endDate);
+
+                System.out.println(sellerLoggedIn.getUserName() + " sold " + numberOfPiecesSold + " from " +
+                        startDate + " till " + endDate);
+            }
+                break;
+
+            // View Best Seller Products over a specific period of time case
+            case 2:{
+                ArrayList<Product> bestSellingProductOverTime = sellerLoggedIn.bestSellingProductOverTime(startDate, endDate);
+                System.out.println(sellerLoggedIn.getUserName() + "'s best selling products is/are:- ");
+                for (Product product : bestSellingProductOverTime) {
+                    System.out.println("Product ID: " + product.getProductID());
+                    System.out.println("Product Name: " + product.getProductName());
+                }
+            }
+                break;
+
+            // View Most Revenue Products over a specific period of time case
+            case 3: {
+                ArrayList<Product> mostRevenueProductsOverTime = sellerLoggedIn.mostRevenueProductOverTime(startDate, endDate);
+                System.out.println(sellerLoggedIn.getUserName() + "'s best selling products is/are:- ");
+                for (Product product : mostRevenueProductsOverTime) {
+                    System.out.println("Product ID: " + product.getProductID());
+                    System.out.println("Product Name: " + product.getProductName());
+                }
+            }
+                break;
+        }
+    }
 
     public static void sellerViewDataOfOrders(Seller sellerLoggedIn) {}
 }
