@@ -1,2 +1,3 @@
-package PACKAGE_NAME;public enum OrderStatus {
+public enum OrderStatus {
+    CANCELLED, PENDING, DELIVERED
 }
