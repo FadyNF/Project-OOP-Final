@@ -31,7 +31,7 @@ public class Order implements Serializable {
     }
 
     public void setOrderProducts(HashMap<Product, Integer> orderProducts) {
-        this.orderProducts = orderProducts;
+        this.orderProducts = new HashMap<>(orderProducts);
     }
 
     public OrderStatus getStatus() {

@@ -7,7 +7,7 @@ public class Main {
 
     static Scanner s = new Scanner(System.in);
     private static final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
+    static Seller chosenSeller = null;
     static ArrayList<Admin> adminArrayList = new ArrayList<>();
     static ArrayList<Customer> customerArrayList = new ArrayList<>();
     static ArrayList<Seller> sellerArrayList = new ArrayList<>();
@@ -151,8 +151,27 @@ public class Main {
             System.out.println("name: " + customer.getUserName());
             System.out.println("pass: " + customer.getUserPassword());
         }*/
+        /*for (Seller seller: sellerArrayList) {
+            System.out.println("SellerName: " + seller.getUserName());
 
+            System.out.println("Orders: ");
+            for (Order order :seller.getSellerOrders()) {
+                System.out.println("\tOrderID: " + order.getOrderID());
+                System.out.println("\tOrder Price: " + order.getTotalPrice());
+                System.out.println("\tAddress: " + order.getOrderAddress());
+                System.out.println("\tproducts with quantity:- ");
 
+                for (HashMap.Entry<Product, Integer> entry : order.getOrderProducts().entrySet()) {
+                    Product product = entry.getKey();
+                    int quantity = entry.getValue();
+
+                    System.out.println("  - " + product.getProductName() +
+                            ", Quantity: " + quantity +
+                            ", Price per unit: " + product.getProductPrice());
+                }
+
+            }
+        }*/
 
         startupMenu();
         saveArrayLists();
@@ -1544,8 +1563,6 @@ public class Main {
             System.out.print("Invalid Input ");
         }
 
-        Seller chosenSeller = null;
-
         switch (option) {
             // Search Vendors & Products case
             case 1:
@@ -1709,23 +1726,21 @@ public class Main {
                     if (cartConfirmation.equalsIgnoreCase("yes")) {
                         int orderID = orderArrayList.size() + 1;
                         Order newOrder = new Order(orderID);
-                        newOrder.setOrderProducts(cartProducts);
+                        newOrder.setOrderProducts(customerLoggedIn.getCustomerCart().getCartProducts());
                         newOrder.setOrderDate(new Date());
                         newOrder.setTotalPrice(customerLoggedIn.getCustomerCart().getTotalPrice());
 
-                        s.nextLine();
-
                         System.out.print("Enter your address: ");
                         String address = s.nextLine();
-                        System.out.println("Address Entered: ");
+                        //s.nextLine();
+                        System.out.println("Address Entered: " + address);
                         newOrder.setOrderAddress(address);
 
                         orderArrayList.add(newOrder);
                         customerLoggedIn.getCustomerOrders().add(newOrder);
+                        chosenSeller.getSellerOrders().add(newOrder);
                     }
                 }
-
-
             }
                 break;
         }
