@@ -15,17 +15,17 @@ public class Main {
     static ArrayList<Product> productArrayList = new ArrayList<>();
 
 
-    static final String adminPath = "C:\\Users\\Fady\\Desktop\\OOP Project\\Project OOP Final\\src\\admins.bin";
-    static final String customerPath = "C:\\Users\\Fady\\Desktop\\OOP Project\\Project OOP Final\\src\\customers.bin";
-    static final String sellerPath = "C:\\Users\\Fady\\Desktop\\OOP Project\\Project OOP Final\\src\\sellers.bin";
-    static final String orderPath = "C:\\Users\\Fady\\Desktop\\OOP Project\\Project OOP Final\\src\\orders.bin";
-    static final String productPath = "C:\\Users\\Fady\\Desktop\\OOP Project\\Project OOP Final\\src\\products.bin";
+    static final String adminPath = "C:\\Users\\Airport GM\\IdeaProjects\\Project-OOP-Final\\src\\admins.bin";
+    static final String customerPath = "C:\\Users\\Airport GM\\IdeaProjects\\Project-OOP-Final\\src\\customers.bin";
+    static final String sellerPath = "C:\\Users\\Airport GM\\IdeaProjects\\Project-OOP-Final\\src\\sellers.bin";
+    static final String orderPath = "C:\\Users\\Airport GM\\IdeaProjects\\Project-OOP-Final\\src\\orders.bin";
+    static final String productPath = "C:\\Users\\Airport GM\\IdeaProjects\\Project-OOP-Final\\src\\products.bin";
 
     public static void main(String[] args) {
 
         loadArrayLists();
-        /*
-        sellerArrayList.add(new Seller("Buffalo Burger", "123", 1));
+
+       /* sellerArrayList.add(new Seller("Buffalo Burger", "123", 1));
         sellerArrayList.add(new Seller("Wimpy", "123", 2));
         sellerArrayList.add(new Seller("Willy's Kitchen", "123", 3));
         sellerArrayList.add(new Seller("Alagha", "123", 4));
@@ -39,7 +39,7 @@ public class Main {
         sellerArrayList.add(new Seller("Wafflicious", "123", 12));
         sellerArrayList.add(new Seller("DipNDip", "123", 13));
         sellerArrayList.add(new Seller("Primos", "123", 14));
-        sellerArrayList.add(new Seller("Cilantro", "123", 15));*/
+        sellerArrayList.add(new Seller("Cilantro", "123", 15));
         /*
         productArrayList.add(new Product(1, "Animal Style", 166));
         productArrayList.add(new Product(2, "Cholos", 161));
@@ -138,7 +138,7 @@ public class Main {
                 System.out.println("\tProduct Price: " + product.getProductPrice());
             }
             System.out.println();
-        }*/
+        }
         /*for  (Seller seller : sellerArrayList){
             if (seller.getUserName().equalsIgnoreCase("Alagha")){
                 for (Product product : seller.getSellerProducts()){
@@ -173,7 +173,7 @@ public class Main {
             }
         }*/
 
-        startupMenu();
+       startupMenu();
         saveArrayLists();
     }
     public static void loadArrayLists() {
@@ -1769,7 +1769,91 @@ public class Main {
 
     public static void customerTrackHistory(Customer customerLoggedIn) {
 
-    }
+            System.out.println("Choose an option:");
+            System.out.println("1. View all of his order details");
+            System.out.println("2. Track order status");
+            System.out.println("3. Rate orders from 1 to 5");
+
+            int option = s.nextInt();
+
+            switch (option) {
+                case 1:
+                    for (Order order : customerLoggedIn.getCustomerOrders()) {
+                        System.out.println("Order Details:");
+                        System.out.println("Order ID: " + order.getOrderID());
+                        for (HashMap.Entry<Product, Integer> entry : order.getOrderProducts().entrySet()) {
+                            Product product = entry.getKey();
+                            int quantity = entry.getValue();
+
+                            System.out.println("  - " + product.getProductName() +
+                                    ", Quantity: " + quantity +
+                                    ", Price per unit: " + product.getProductPrice());
+                        }
+
+                        System.out.println("Order Status: " + order.getStatus());
+                        System.out.println("Total Amount: " + order.getTotalPrice());
+                        System.out.println("Order Date: " + order.getOrderDate());
+
+                    }
+                    break;
+                case 2:
+                    System.out.println("Enter the order ID to track:");
+                    int orderId = s.nextInt();
+
+                    Order orderToTrack = null;
+
+                    for (Order order : customerLoggedIn.getCustomerOrders()) {
+                        if (order.getOrderID() == orderId) {
+                            orderToTrack = order;
+                            break;
+                        }
+                    }
+
+                    if (orderToTrack != null) {
+                        System.out.println("Order ID: " + orderToTrack.getOrderID());
+                        System.out.println("Order Status: " + orderToTrack.getStatus());
+                    } else {
+                        System.out.println("Order not found.");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Enter the order ID to rate:");
+                    int orderIdToRate = s.nextInt();
+
+                    Order orderToRate = null;
+
+                    for (Order order : customerLoggedIn.getCustomerOrders()) {
+                        if (order.getOrderID() == orderIdToRate) {
+                            orderToRate = order;
+                            break;
+                        }
+                    }
+
+                    if (orderToRate != null) {
+                        System.out.println("Enter your rating (1 to 5):");
+                        int rating;
+
+
+                        while (true) {
+                            rating = s.nextInt();
+                            if (rating >= 1 && rating <= 5)
+                                break;
+                            System.out.println("Invalid Input");
+                        }
+                            orderToRate.setRate(rating);
+                            System.out.println("Rating submitted successfully.");
+
+                    } else
+                {
+                        System.out.println("Order not found.");
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid option. Please choose a valid option.");
+            }
+        }
+
+
 
     public static void customerSearchVendorsAndProducts(Customer customerLoggedIn) {
         s.nextLine();
