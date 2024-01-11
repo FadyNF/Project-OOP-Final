@@ -1768,14 +1768,13 @@ public class Main {
     }
 
     public static void customerTrackHistory(Customer customerLoggedIn) {
-            Scanner scanner = new Scanner(System.in);
 
             System.out.println("Choose an option:");
             System.out.println("1. View all of his order details");
             System.out.println("2. Track order status");
             System.out.println("3. Rate orders from 1 to 5");
 
-            int option = scanner.nextInt();
+            int option = s.nextInt();
 
             switch (option) {
                 case 1:
@@ -1799,7 +1798,7 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Enter the order ID to track:");
-                    int orderId = scanner.nextInt();
+                    int orderId = s.nextInt();
 
                     Order orderToTrack = null;
 
@@ -1819,7 +1818,7 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("Enter the order ID to rate:");
-                    int orderIdToRate = scanner.nextInt();
+                    int orderIdToRate = s.nextInt();
 
                     Order orderToRate = null;
 
@@ -1832,15 +1831,20 @@ public class Main {
 
                     if (orderToRate != null) {
                         System.out.println("Enter your rating (1 to 5):");
-                        int rating = scanner.nextInt();
+                        int rating;
 
-                        if (rating >= 1 && rating <= 5) {
+
+                        while (true) {
+                            rating = s.nextInt();
+                            if (rating >= 1 && rating <= 5)
+                                break;
+                            System.out.println("Invalid Input");
+                        }
                             orderToRate.setRate(rating);
                             System.out.println("Rating submitted successfully.");
-                        } else {
-                            System.out.println("Invalid rating. Please enter a rating between 1 and 5.");
-                        }
-                    } else {
+
+                    } else
+                {
                         System.out.println("Order not found.");
                     }
                     break;
