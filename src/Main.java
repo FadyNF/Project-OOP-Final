@@ -152,6 +152,8 @@ public class Main {
             System.out.println("pass: " + customer.getUserPassword());
         }*/
 
+
+
         startupMenu();
         saveArrayLists();
     }
@@ -1531,9 +1533,8 @@ public class Main {
         System.out.println("2) Add Product to Cart");
         System.out.println("3) Remove Product from Cart");
         System.out.println("4) Cancel/Clear Cart");
-        System.out.println("5) View Cart");
-        System.out.println("6) Confirm Cart");
-
+        System.out.println("5) View Cart & Confirm Order");
+        
         System.out.print("Choice: ");
         byte option;
         while (true) {
@@ -1543,6 +1544,8 @@ public class Main {
             System.out.print("Invalid Input ");
         }
 
+        Seller chosenSeller = null;
+
         switch (option) {
             // Search Vendors & Products case
             case 1:
@@ -1551,25 +1554,31 @@ public class Main {
 
             // Add Product to Cart case
             case 2: {
-                System.out.println("Which Vendor would you like to dine in? ");
-                for (int i = 0; i < sellerArrayList.size(); i++){
-                    System.out.println((i + 1) + ") " + sellerArrayList.get(i).getUserName());
+
+                if (chosenSeller == null) {
+                    System.out.println("Which Vendor would you like to dine in? ");
+                    for (int i = 0; i < sellerArrayList.size(); i++){
+                        System.out.print((i + 1) + ") " + sellerArrayList.get(i).getUserName() + '\t');
+                        if (i% 3 == 0)
+                            System.out.println();
+                    }
+
+                    byte sellerOption;
+                    while (true) {
+                        sellerOption = s.nextByte();
+                        if (sellerOption >= 1 && sellerOption <= sellerArrayList.size())
+                            break;
+                        System.out.print("Invalid Input ");
+                    }
+                    chosenSeller = sellerArrayList.get(sellerOption - 1);
                 }
 
-                byte sellerOption;
-                while (true) {
-                    sellerOption = s.nextByte();
-                    if (sellerOption >= 1 && sellerOption <= sellerArrayList.size())
-                        break;
-                    System.out.print("Invalid Input ");
-                }
 
-                Seller vendorCustomerChose = sellerArrayList.get(sellerOption - 1);
 
                 // Print all the seller's products
-                System.out.println(vendorCustomerChose.getUserName() + " products and prices:- ");
-                for (int i = 0; i < vendorCustomerChose.getSellerProducts().size(); i++) {
-                    Product product = vendorCustomerChose.getSellerProducts().get(i);
+                System.out.println(chosenSeller.getUserName() + " products and prices:- ");
+                for (int i = 0; i < chosenSeller.getSellerProducts().size(); i++) {
+                    Product product = chosenSeller.getSellerProducts().get(i);
                     System.out.println("\t" + (i + 1) + ") " + product.getProductName()
                             + ", Price: " + product.getProductPrice());
                 }
@@ -1581,7 +1590,7 @@ public class Main {
                         break; // User chose to finish adding products
                     }
 
-                    System.out.println("How many of " + vendorCustomerChose.getSellerProducts().get(productOption - 1).getProductName()
+                    System.out.println("How many of " + chosenSeller.getSellerProducts().get(productOption - 1).getProductName()
                             + " would you like? ");
                     int productQuantity;
                     while (true) {
@@ -1591,8 +1600,8 @@ public class Main {
                         System.out.print("Invalid Input ");
                     }
 
-                    if (productOption <= vendorCustomerChose.getSellerProducts().size()){
-                        Product selectedProduct = vendorCustomerChose.getSellerProducts().get(productOption - 1);
+                    if (productOption <= chosenSeller.getSellerProducts().size()){
+                        Product selectedProduct = chosenSeller.getSellerProducts().get(productOption - 1);
                         customerLoggedIn.getCustomerCart().addProduct(selectedProduct, productQuantity);
                     } else {
                         System.out.println("Invalid product number. Please try again.");
@@ -1673,21 +1682,49 @@ public class Main {
             case 5: {
 
                 HashMap<Product, Integer> cartProducts = customerLoggedIn.getCustomerCart().getCartProducts();
-                int i = 0;
-                for (HashMap.Entry<Product, Integer> entry : cartProducts.entrySet()) {
-                    Product product = entry.getKey();
-                    int quantity = entry.getValue();
+                if (!cartProducts.isEmpty()) {
+                    int i = 0;
+                    for (HashMap.Entry<Product, Integer> entry : cartProducts.entrySet()) {
+                        Product product = entry.getKey();
+                        int quantity = entry.getValue();
 
-                    System.out.println(i + ") " + product.getProductName() + ", Quantity: " + quantity);
-                    i++;
+                        System.out.println((i + 1) + ") " + product.getProductName() + ", Quantity: " + quantity);
+                        i++;
+                    }
+
+                    s.nextLine();
+                    System.out.println("Total Cart Price: " + customerLoggedIn.getCustomerCart().getTotalPrice());
+                    System.out.println("-------------------------------");
+                    System.out.println("Confirm Order? yes/no");
+
+                    String cartConfirmation;
+                    while (true) {
+                        cartConfirmation = s.nextLine();
+                        if (cartConfirmation.equalsIgnoreCase("yes") ||
+                                cartConfirmation.equalsIgnoreCase("no"))
+                            break;
+                        System.out.print("Invalid Input ");
+                    }
+
+                    if (cartConfirmation.equalsIgnoreCase("yes")) {
+                        int orderID = orderArrayList.size() + 1;
+                        Order newOrder = new Order(orderID);
+                        newOrder.setOrderProducts(cartProducts);
+                        newOrder.setOrderDate(new Date());
+                        newOrder.setTotalPrice(customerLoggedIn.getCustomerCart().getTotalPrice());
+
+                        s.nextLine();
+
+                        System.out.print("Enter your address: ");
+                        String address = s.nextLine();
+                        System.out.println("Address Entered: ");
+                        newOrder.setOrderAddress(address);
+
+                        orderArrayList.add(newOrder);
+                        customerLoggedIn.getCustomerOrders().add(newOrder);
+                    }
                 }
 
-                System.out.println("Total Cart Price: " + customerLoggedIn.getCustomerCart().getTotalPrice());
-            }
-                break;
-
-            // Confirm cart case
-            case 6: {
 
             }
                 break;
