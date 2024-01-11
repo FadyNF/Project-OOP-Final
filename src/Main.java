@@ -15,165 +15,15 @@ public class Main {
     static ArrayList<Product> productArrayList = new ArrayList<>();
 
 
-    static final String adminPath = "C:\\Users\\Airport GM\\IdeaProjects\\Project-OOP-Final\\src\\admins.bin";
-    static final String customerPath = "C:\\Users\\Airport GM\\IdeaProjects\\Project-OOP-Final\\src\\customers.bin";
-    static final String sellerPath = "C:\\Users\\Airport GM\\IdeaProjects\\Project-OOP-Final\\src\\sellers.bin";
-    static final String orderPath = "C:\\Users\\Airport GM\\IdeaProjects\\Project-OOP-Final\\src\\orders.bin";
-    static final String productPath = "C:\\Users\\Airport GM\\IdeaProjects\\Project-OOP-Final\\src\\products.bin";
+    static final String adminPath = "C:\\Users\\Fady\\Desktop\\OOP Project\\Project OOP Final\\src\\admins.bin";
+    static final String customerPath = "C:\\Users\\Fady\\Desktop\\OOP Project\\Project OOP Final\\src\\customers.bin";
+    static final String sellerPath = "C:\\Users\\Fady\\Desktop\\OOP Project\\Project OOP Final\\src\\sellers.bin";
+    static final String orderPath = "C:\\Users\\Fady\\Desktop\\OOP Project\\Project OOP Final\\src\\orders.bin";
+    static final String productPath = "C:\\Users\\Fady\\Desktop\\OOP Project\\Project OOP Final\\src\\products.bin";
 
     public static void main(String[] args) {
-
         loadArrayLists();
-
-       /* sellerArrayList.add(new Seller("Buffalo Burger", "123", 1));
-        sellerArrayList.add(new Seller("Wimpy", "123", 2));
-        sellerArrayList.add(new Seller("Willy's Kitchen", "123", 3));
-        sellerArrayList.add(new Seller("Alagha", "123", 4));
-        sellerArrayList.add(new Seller("Pablo & Abdo", "123", 5));
-        sellerArrayList.add(new Seller("Bazooka", "123", 6));
-        sellerArrayList.add(new Seller("City Crepe", "123", 7));
-        sellerArrayList.add(new Seller("Mori Sushi", "123", 8));
-        sellerArrayList.add(new Seller("Prego", "123", 9));
-        sellerArrayList.add(new Seller("Asian Corner", "123", 10));
-        sellerArrayList.add(new Seller("Paul", "123", 11));
-        sellerArrayList.add(new Seller("Wafflicious", "123", 12));
-        sellerArrayList.add(new Seller("DipNDip", "123", 13));
-        sellerArrayList.add(new Seller("Primos", "123", 14));
-        sellerArrayList.add(new Seller("Cilantro", "123", 15));
-        /*
-        productArrayList.add(new Product(1, "Animal Style", 166));
-        productArrayList.add(new Product(2, "Cholos", 161));
-        productArrayList.add(new Product(3, "Blue Cheese", 166));
-        productArrayList.add(new Product(4, "Hitchhiker", 198));
-        productArrayList.add(new Product(5, "Old School", 161));
-        productArrayList.add(new Product(6, "Spicy B", 107));
-        productArrayList.add(new Product(7, "New Skool", 105));
-        productArrayList.add(new Product(8, "BBQ Bacon Chicken", 115));
-        productArrayList.add(new Product(9, "Cheesy Chicky Fillet", 105));
-        productArrayList.add(new Product(10, "Junior Cheese Burger", 48));
-        productArrayList.add(new Product(11, "Big Willy", 142));
-        productArrayList.add(new Product(12, "Chili Chili", 152));
-        productArrayList.add(new Product(13, "Pepperazzi", 157));
-        productArrayList.add(new Product(14, "Brooklyn Shrooms", 142));
-        productArrayList.add(new Product(15, "Ranchie Crunch", 172));
-        productArrayList.add(new Product(16, "Chicken shawerma", 65));
-        productArrayList.add(new Product(17, "Beef Shawerma", 80));
-        productArrayList.add(new Product(18, "Crunchy chicken Sandwich", 80));
-        productArrayList.add(new Product(19, "Fajita Sandwich", 80));
-        productArrayList.add(new Product(20, "French Fries Sandwich", 35));
-        productArrayList.add(new Product(21, "Pablo Burger", 65));
-        productArrayList.add(new Product(22, "Original Tony Burger", 95));
-        productArrayList.add(new Product(23, "Con Carne Taco", 85));
-        productArrayList.add(new Product(24, "Corden Bleu Sandwich", 89));
-        productArrayList.add(new Product(25, "Cowboy Hot Dog Sandwich", 85));
-        productArrayList.add(new Product(26, "Tower Chicken Crispy", 100));
-        productArrayList.add(new Product(27, "Chicken Turkey", 100));
-        productArrayList.add(new Product(28, "Honey Yummy", 135));
-        productArrayList.add(new Product(29, "RPG", 150));
-        productArrayList.add(new Product(30, "Zinger Supreme", 9));
-        productArrayList.add(new Product(31, "Hot Dog Crepe", 62));
-        productArrayList.add(new Product(32, "Crispy Crepe", 72));
-        productArrayList.add(new Product(33, "Tuna Crepe", 57));
-        productArrayList.add(new Product(34, "Mafia Crepe", 87));
-        productArrayList.add(new Product(35, "Monster Crepe", 67));
-        productArrayList.add(new Product(36, "Combo 30", 420));
-        productArrayList.add(new Product(37, "Combo 50", 650));
-        productArrayList.add(new Product(38, "Combo 100", 1250));
-        productArrayList.add(new Product(39, "Miso Soup", 65));
-        productArrayList.add(new Product(40, "Tom Yum", 110));
-        productArrayList.add(new Product(41, "Grilled Kofta Meal", 127));
-        productArrayList.add(new Product(42, "Grilled Fillet Meal", 163));
-        productArrayList.add(new Product(43, "Star Mix Meal", 253));
-        productArrayList.add(new Product(44, "Shish Tawook Meal", 127));
-        productArrayList.add(new Product(45, "Chicken BBQ Meal", 95));
-        productArrayList.add(new Product(46, "Mahraja Meal", 115));
-        productArrayList.add(new Product(47, "Sea Food Meal", 145));
-        productArrayList.add(new Product(48, "Nasi Goreng", 110));
-        productArrayList.add(new Product(49, "Chicken Sechuan", 105));
-        productArrayList.add(new Product(50, "Mah Mee Noodles", 55));
-        productArrayList.add(new Product(51, "Miso Avocado Toast", 159));
-        productArrayList.add(new Product(52, "Feta Avo", 169));
-        productArrayList.add(new Product(53, "Salmon Croll", 199));
-        productArrayList.add(new Product(54, "Halloumi Pesto", 164));
-        productArrayList.add(new Product(55, "Omelette Club", 169));
-        productArrayList.add(new Product(56, "Belgium Waffle", 58));
-        productArrayList.add(new Product(57, "American Waffle", 47));
-        productArrayList.add(new Product(58, "Mickey Waffle", 39));
-        productArrayList.add(new Product(59, "TNT Belgium Waffle", 100));
-        productArrayList.add(new Product(60, "Maltesers Waffle", 90));
-        productArrayList.add(new Product(61, "Brownies Crepe", 232));
-        productArrayList.add(new Product(62, "Fettuccine Crepe", 272));
-        productArrayList.add(new Product(63, "Waffle Stick", 167));
-        productArrayList.add(new Product(64, "Oreo Pancakes", 316));
-        productArrayList.add(new Product(65, "Bella Nutella Cake", 1228));
-        productArrayList.add(new Product(66, "Salami Pizza", 145));
-        productArrayList.add(new Product(67, "Hot Dog Pizza", 140));
-        productArrayList.add(new Product(68, "Chicken Ranch Pizza", 160));
-        productArrayList.add(new Product(69, "Chicken BBQ Pizza", 160));
-        productArrayList.add(new Product(70, "Smoked Pizza", 165));
-        productArrayList.add(new Product(71, "Cappucciano", 65));
-        productArrayList.add(new Product(72, "Latte", 60));
-        productArrayList.add(new Product(73, "Latte Frappe", 80));
-        productArrayList.add(new Product(74, "Flat White",70 ));
-        productArrayList.add(new Product(75, "Iced Spanish Latte", 85));*/
-        /*int counter = 0;
-        for (int i = 0; i < 15; i++) {
-            for (int j = 0; j < 5; j++) {
-                Seller seller = sellerArrayList.get(i);
-                Product product = productArrayList.get(counter);
-                seller.getSellerProducts().add(product);
-                counter++;
-            }
-        }*/
-        /*for (Seller seller : sellerArrayList){
-            System.out.println("Seller ID: " + seller.getSellerID());
-            System.out.println("Seller Name: " + seller.getUserName());
-            System.out.println("Seller Pass: " + seller.getUserPassword());
-
-            System.out.println("______________________________");
-            System.out.println("Seller Products:-");
-            for (Product product : seller.getSellerProducts()){
-                System.out.println("\tProduct ID: " + product.getProductID());
-                System.out.println("\tProduct Name: " + product.getProductName());
-                System.out.println("\tProduct Price: " + product.getProductPrice());
-            }
-            System.out.println();
-        }
-        /*for  (Seller seller : sellerArrayList){
-            if (seller.getUserName().equalsIgnoreCase("Alagha")){
-                for (Product product : seller.getSellerProducts()){
-                    System.out.println("Product ID: " + product.getProductID());
-                    System.out.println("Product Name: " + product.getProductName());
-                }
-            }
-        }*/
-        /*for (Customer customer : customerArrayList) {
-            System.out.println("name: " + customer.getUserName());
-            System.out.println("pass: " + customer.getUserPassword());
-        }*/
-        /*for (Seller seller: sellerArrayList) {
-            System.out.println("SellerName: " + seller.getUserName());
-
-            System.out.println("Orders: ");
-            for (Order order :seller.getSellerOrders()) {
-                System.out.println("\tOrderID: " + order.getOrderID());
-                System.out.println("\tOrder Price: " + order.getTotalPrice());
-                System.out.println("\tAddress: " + order.getOrderAddress());
-                System.out.println("\tproducts with quantity:- ");
-
-                for (HashMap.Entry<Product, Integer> entry : order.getOrderProducts().entrySet()) {
-                    Product product = entry.getKey();
-                    int quantity = entry.getValue();
-
-                    System.out.println("  - " + product.getProductName() +
-                            ", Quantity: " + quantity +
-                            ", Price per unit: " + product.getProductPrice());
-                }
-
-            }
-        }*/
-
-       startupMenu();
+        startupMenu();
         saveArrayLists();
     }
     public static void loadArrayLists() {
@@ -970,6 +820,7 @@ public class Main {
                 for (Seller seller : sellersWithMaxRevenue) {
                     System.out.println("Seller ID: " + seller.getSellerID());
                     System.out.println("Seller Name: " + seller.getUserName());
+                    System.out.println("Seller Revenue: " + seller.calculateTotalRevenue());
                     System.out.println();
                 }
             }
@@ -1431,7 +1282,7 @@ public class Main {
 
                 Order foundOrder = null;
                 for (Order order : orderArrayList) {
-                    if (foundOrder.getOrderID() == order.getOrderID()) {
+                    if (orderID == order.getOrderID()) {
                         foundOrder = order;
                         break;
                     }
@@ -1453,7 +1304,7 @@ public class Main {
 
                 Order foundOrder = null;
                 for (Order order : orderArrayList) {
-                    if (foundOrder.getOrderID() == order.getOrderID()) {
+                    if (orderID == order.getOrderID()) {
                         foundOrder = order;
                         break;
                     }
@@ -1571,7 +1422,6 @@ public class Main {
 
             // Add Product to Cart case
             case 2: {
-
                 if (chosenSeller == null) {
                     System.out.println("Which Vendor would you like to dine in? ");
                     for (int i = 0; i < sellerArrayList.size(); i++){
@@ -1589,8 +1439,6 @@ public class Main {
                     }
                     chosenSeller = sellerArrayList.get(sellerOption - 1);
                 }
-
-
 
                 // Print all the seller's products
                 System.out.println(chosenSeller.getUserName() + " products and prices:- ");
@@ -1768,16 +1616,18 @@ public class Main {
     }
 
     public static void customerTrackHistory(Customer customerLoggedIn) {
+        System.out.println("-----------------------------");
+        System.out.println("Choose an option:");
+        System.out.println("1. View all of his order details");
+        System.out.println("2. Track order status");
+        System.out.println("3. Rate orders from 1 to 5");
 
-            System.out.println("Choose an option:");
-            System.out.println("1. View all of his order details");
-            System.out.println("2. Track order status");
-            System.out.println("3. Rate orders from 1 to 5");
+        int option = s.nextInt();
 
-            int option = s.nextInt();
+        switch (option) {
+            case 1:{
 
-            switch (option) {
-                case 1:
+                if (!customerLoggedIn.getCustomerOrders().isEmpty()) {
                     for (Order order : customerLoggedIn.getCustomerOrders()) {
                         System.out.println("Order Details:");
                         System.out.println("Order ID: " + order.getOrderID());
@@ -1795,8 +1645,15 @@ public class Main {
                         System.out.println("Order Date: " + order.getOrderDate());
 
                     }
-                    break;
-                case 2:
+                } else {
+                    System.out.println("You haven't ordered anything yet");
+                }
+
+            }
+                break;
+            case 2:{
+                if (!customerLoggedIn.getCustomerOrders().isEmpty()) {
+
                     System.out.println("Enter the order ID to track:");
                     int orderId = s.nextInt();
 
@@ -1815,8 +1672,13 @@ public class Main {
                     } else {
                         System.out.println("Order not found.");
                     }
-                    break;
-                case 3:
+                } else {
+                    System.out.println("You haven't ordered anything yet");
+                }
+            }
+                break;
+            case 3: {
+                if (!customerLoggedIn.getCustomerOrders().isEmpty()) {
                     System.out.println("Enter the order ID to rate:");
                     int orderIdToRate = s.nextInt();
 
@@ -1830,30 +1692,51 @@ public class Main {
                     }
 
                     if (orderToRate != null) {
-                        System.out.println("Enter your rating (1 to 5):");
-                        int rating;
+                    System.out.println("Enter your rating (1 to 5):");
+                    int rating;
 
 
-                        while (true) {
-                            rating = s.nextInt();
-                            if (rating >= 1 && rating <= 5)
-                                break;
-                            System.out.println("Invalid Input");
-                        }
-                            orderToRate.setRate(rating);
-                            System.out.println("Rating submitted successfully.");
-
-                    } else
-                {
-                        System.out.println("Order not found.");
+                    while (true) {
+                        rating = s.nextInt();
+                        if (rating >= 1 && rating <= 5)
+                            break;
+                        System.out.println("Invalid Input");
                     }
-                    break;
-                default:
-                    System.out.println("Invalid option. Please choose a valid option.");
+                    orderToRate.setRate(rating);
+                    System.out.println("Rating submitted successfully.");
+
+                } else {
+                    System.out.println("Order not found.");
+                }
+
+                } else {
+                    System.out.println("You haven't ordered anything yet");
+                }
             }
+                break;
+            default:
+                System.out.println("Invalid option. Please choose a valid option.");
         }
 
+        System.out.println("Return to Customer Menu?");
+        System.out.println("1) Yes");
+        System.out.println("2) No");
+        byte returnOption;
+        while (true) {
+            returnOption = s.nextByte();
+            if (returnOption == 1 || returnOption == 2)
+                break;
+            System.out.println("Invalid Input ");
+        }
 
+        if (returnOption == 1)
+            customerMenu(customerLoggedIn);
+        else {
+            customerLoggedIn.getCustomerCart().clearCart();
+            saveArrayLists();
+            System.exit(0);
+        }
+    }
 
     public static void customerSearchVendorsAndProducts(Customer customerLoggedIn) {
         s.nextLine();
