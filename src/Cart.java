@@ -65,5 +65,6 @@ public class Cart implements Serializable {
 
     public void clearCart(){
         cartProducts.clear();
+        totalPrice = 0.0;
     }
 }

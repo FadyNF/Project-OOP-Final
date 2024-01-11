@@ -1,10 +1,7 @@
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -47,7 +44,7 @@ public class Main {
         productArrayList.add(new Product(1, "Animal Style", 166));
         productArrayList.add(new Product(2, "Cholos", 161));
         productArrayList.add(new Product(3, "Blue Cheese", 166));
-        productArrayList.add(new Product(4, "Hitchhicker", 198));
+        productArrayList.add(new Product(4, "Hitchhiker", 198));
         productArrayList.add(new Product(5, "Old School", 161));
         productArrayList.add(new Product(6, "Spicy B", 107));
         productArrayList.add(new Product(7, "New Skool", 105));
@@ -149,6 +146,10 @@ public class Main {
                     System.out.println("Product Name: " + product.getProductName());
                 }
             }
+        }*/
+        /*for (Customer customer : customerArrayList) {
+            System.out.println("name: " + customer.getUserName());
+            System.out.println("pass: " + customer.getUserPassword());
         }*/
 
         startupMenu();
@@ -512,6 +513,27 @@ public class Main {
     }
 
     public static void customerMenu(Customer customerLoggedIn) {
+        System.out.println("-----------------------------");
+        System.out.println("1) Start Ordering ");
+        System.out.println("2) Track Order History ");
+        System.out.print("What would you like to do today?");
+
+        byte option;
+        while (true) {
+            option = s.nextByte();
+            if (option == 1 || option == 2)
+                break;
+            System.out.print("Invalid Input ");
+        }
+
+        switch (option) {
+            case 1:
+                customerStartOrdering(customerLoggedIn);
+                break;
+            case 2:
+                customerTrackHistory(customerLoggedIn);
+                break;
+        }
     }
 
     public static void sellerMenu(Seller sellerLoggedIn) {
@@ -1503,4 +1525,220 @@ public class Main {
         return date;
     }
 
+    public static void customerStartOrdering(Customer customerLoggedIn) {
+        System.out.println("-----------------------------");
+        System.out.println("1) Search Vendors & Products");
+        System.out.println("2) Add Product to Cart");
+        System.out.println("3) Remove Product from Cart");
+        System.out.println("4) Cancel/Clear Cart");
+        System.out.println("5) View Cart");
+        System.out.println("6) Confirm Cart");
+
+        System.out.print("Choice: ");
+        byte option;
+        while (true) {
+            option = s.nextByte();
+            if (option >= 1 && option <= 5)
+                break;
+            System.out.print("Invalid Input ");
+        }
+
+        switch (option) {
+            // Search Vendors & Products case
+            case 1:
+                customerSearchVendorsAndProducts(customerLoggedIn);
+                break;
+
+            // Add Product to Cart case
+            case 2: {
+                System.out.println("Which Vendor would you like to dine in? ");
+                for (int i = 0; i < sellerArrayList.size(); i++){
+                    System.out.println((i + 1) + ") " + sellerArrayList.get(i).getUserName());
+                }
+
+                byte sellerOption;
+                while (true) {
+                    sellerOption = s.nextByte();
+                    if (sellerOption >= 1 && sellerOption <= sellerArrayList.size())
+                        break;
+                    System.out.print("Invalid Input ");
+                }
+
+                Seller vendorCustomerChose = sellerArrayList.get(sellerOption - 1);
+
+                // Print all the seller's products
+                System.out.println(vendorCustomerChose.getUserName() + " products and prices:- ");
+                for (int i = 0; i < vendorCustomerChose.getSellerProducts().size(); i++) {
+                    Product product = vendorCustomerChose.getSellerProducts().get(i);
+                    System.out.println("\t" + (i + 1) + ") " + product.getProductName()
+                            + ", Price: " + product.getProductPrice());
+                }
+
+                while (true) {
+                    System.out.println("Enter the product number you want to add to your cart (0 to finish): ");
+                    int productOption = s.nextInt();
+                    if (productOption == 0) {
+                        break; // User chose to finish adding products
+                    }
+
+                    System.out.println("How many of " + vendorCustomerChose.getSellerProducts().get(productOption - 1).getProductName()
+                            + " would you like? ");
+                    int productQuantity;
+                    while (true) {
+                        productQuantity = s.nextInt();
+                        if (productQuantity > 0)
+                            break;
+                        System.out.print("Invalid Input ");
+                    }
+
+                    if (productOption <= vendorCustomerChose.getSellerProducts().size()){
+                        Product selectedProduct = vendorCustomerChose.getSellerProducts().get(productOption - 1);
+                        customerLoggedIn.getCustomerCart().addProduct(selectedProduct, productQuantity);
+                    } else {
+                        System.out.println("Invalid product number. Please try again.");
+                    }
+                }
+            }
+                break;
+
+            // Remove Product from Cart case
+            case 3: {
+                System.out.println("Select the products you want? ");
+                System.out.println("Your cart:- ");
+
+                HashMap<Product, Integer> cartProducts = customerLoggedIn.getCustomerCart().getCartProducts();
+                int i = 1;
+
+                for (HashMap.Entry<Product, Integer> entry : cartProducts.entrySet()) {
+                    Product product = entry.getKey();
+                    int quantity = entry.getValue();
+
+                    System.out.println(i + ") " + product.getProductName() + ", Quantity: " + quantity);
+                    i++;
+                }
+                System.out.println("Select the product you want to remove (0 to finish): ");
+                int productOption = s.nextInt();
+
+                if (productOption == 0) {
+                    System.out.println("No more products to remove.");
+                } else if (productOption >= 1 && productOption <= cartProducts.size()) {
+                    // Retrieve the product at the selected index
+                    Product selectedProduct = null;
+                    int currentIndex = 1;
+
+                    for (HashMap.Entry<Product, Integer> entry : cartProducts.entrySet()) {
+                        if (currentIndex == productOption) {
+                            selectedProduct = entry.getKey();
+                            break;
+                        }
+                        currentIndex++;
+                    }
+
+                    if (selectedProduct != null) {
+                        System.out.println("Enter the quantity to remove: ");
+                        int quantityToRemove = s.nextInt();
+
+                        // Check if the entered quantity is valid
+                        if (quantityToRemove > 0 && quantityToRemove <= cartProducts.get(selectedProduct)) {
+                            // Update the quantity in the cart
+                            customerLoggedIn.getCustomerCart().removeProduct(selectedProduct, quantityToRemove);
+                            System.out.println("Quantity updated in your cart.");
+                        } else {
+                            System.out.println("Invalid quantity. Please try again.");
+                        }
+                    } else {
+                        System.out.println("Invalid product number. Please try again.");
+                    }
+                } else {
+                    System.out.println("Invalid product number. Please try again.");
+                }
+
+            }
+                break;
+
+            // Cancel/Clear Cart case
+            case 4: {
+                s.nextLine();
+                System.out.println("Confirm Clearing Cart? yes/no");
+                String clearCartConfirmation = s.nextLine();
+
+                if (clearCartConfirmation.equalsIgnoreCase("yes")){
+                    customerLoggedIn.getCustomerCart().clearCart();
+                    System.out.println("Cart Cleared");
+                }
+            }
+                break;
+
+            // View Cart case
+            case 5: {
+
+                HashMap<Product, Integer> cartProducts = customerLoggedIn.getCustomerCart().getCartProducts();
+                int i = 0;
+                for (HashMap.Entry<Product, Integer> entry : cartProducts.entrySet()) {
+                    Product product = entry.getKey();
+                    int quantity = entry.getValue();
+
+                    System.out.println(i + ") " + product.getProductName() + ", Quantity: " + quantity);
+                    i++;
+                }
+
+                System.out.println("Total Cart Price: " + customerLoggedIn.getCustomerCart().getTotalPrice());
+            }
+                break;
+
+            // Confirm cart case
+            case 6: {
+
+            }
+                break;
+        }
+
+        System.out.println("Return to Customer Menu?");
+        System.out.println("1) Yes");
+        System.out.println("2) No");
+        byte returnOption;
+        while (true) {
+            returnOption = s.nextByte();
+            if (returnOption == 1 || returnOption == 2)
+                break;
+            System.out.println("Invalid Input ");
+        }
+
+        if (returnOption == 1)
+            customerMenu(customerLoggedIn);
+        else {
+            customerLoggedIn.getCustomerCart().clearCart();
+            saveArrayLists();
+            System.exit(0);
+        }
+
+
+    }
+
+    public static void customerTrackHistory(Customer customerLoggedIn) {
+
+    }
+
+    public static void customerSearchVendorsAndProducts(Customer customerLoggedIn) {
+        s.nextLine();
+        System.out.println("-----------------------------");
+        System.out.print("What do you want to search for? ");
+        String searchQuery = s.nextLine();
+
+        for (Seller seller : sellerArrayList){
+            ArrayList<Product> sellerListThatMatchesSearch = new ArrayList<>();
+            sellerListThatMatchesSearch = customerLoggedIn.searchProducts(seller.getSellerProducts(), searchQuery);
+
+            if (!sellerListThatMatchesSearch.isEmpty()){
+                for (Product product : sellerListThatMatchesSearch) {
+                    System.out.println("Product ID: " + product.getProductID());
+                    System.out.println("Product Name: " + product.getProductName());
+                    System.out.println("Product Price: " + product.getProductPrice());
+                    System.out.println("Product Seller: " + seller.getUserName());
+                }
+                System.out.println("____________________________");
+            }
+
+        }
+    }
 }
