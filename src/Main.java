@@ -26,6 +26,7 @@ public class Main {
         startupMenu();
         saveArrayLists();
     }
+
     public static void loadArrayLists() {
         try {
             try (ObjectInputStream oisAdmins = new ObjectInputStream(new FileInputStream(adminPath))) {
@@ -77,11 +78,18 @@ public class Main {
         System.out.print("Choose Option: ");
         byte loginOption;
         while (true) {
-            loginOption = s.nextByte();
-            if (loginOption == 1 || loginOption == 2) {
-                break;
+            try {
+                loginOption = s.nextByte();
+
+                if (loginOption == 1 || loginOption == 2) {
+                    break;
+                } else {
+                    System.out.println("Invalid Choice");
+                }
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input. Please enter a valid number.");
             }
-            System.out.println("Invalid Choice ");
         }
 
         System.out.println("1) Admin");
@@ -90,11 +98,16 @@ public class Main {
         System.out.println("Choose your role: ");
         byte roleOption;
         while (true) {
-            roleOption = s.nextByte();
-            if (roleOption >= 1 && roleOption <= 3) {
-                break;
+            try {
+                roleOption = s.nextByte();
+                if (roleOption >= 1 && roleOption <= 3)
+                    break;
+
+                System.out.println("Invalid Choice ");
+            } catch(InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input. Please enter a valid number.");
             }
-            System.out.println("Invalid Choice ");
         }
 
         switch (roleOption) {
@@ -139,11 +152,18 @@ public class Main {
                     System.out.println("Would you like to Sign up? \n1) Yes\n2) No");
 
                     while (true) {
-                        failedLoginChoice = s.nextByte();
-                        if (failedLoginChoice == 1 || failedLoginChoice == 2) {
-                            break;
+                        try {
+                            failedLoginChoice = s.nextByte();
+                            if (failedLoginChoice == 1 || failedLoginChoice == 2)
+                                break;
+
+                            System.out.println("Invalid Choice ");
+
+                        } catch (InputMismatchException e) {
+                            s.next();
+                            System.out.println("Invalid Input, please enter a valid number");
                         }
-                        System.out.println("Invalid Choice ");
+
                     }
 
 
@@ -167,11 +187,17 @@ public class Main {
                     System.out.println("User already exists");
                     System.out.println("Would you like to login? \n1) Yes\n2) No");
                     while (true) {
-                        failedLoginChoice = s.nextByte();
-                        if (failedLoginChoice == 1 || failedLoginChoice == 2) {
-                            break;
+                        try {
+                            failedLoginChoice = s.nextByte();
+                            if (failedLoginChoice == 1 || failedLoginChoice == 2)
+                                break;
+                            System.out.println("Invalid Choice ");
+
+                        } catch (InputMismatchException e) {
+                            s.next();
+                            System.out.println("Invalid Input, please enter a valid number");
                         }
-                        System.out.println("Invalid Choice ");
+
                     }
 
                     if (failedLoginChoice == 1) {
@@ -219,11 +245,16 @@ public class Main {
                     System.out.println("Would you like to Sign up? \n1) Yes\n2) No");
 
                     while (true) {
-                        failedLoginChoice = s.nextByte();
-                        if (failedLoginChoice == 1 || failedLoginChoice == 2) {
-                            break;
+                        try {
+                            failedLoginChoice = s.nextByte();
+                            if (failedLoginChoice == 1 || failedLoginChoice == 2)
+                                break;
+                            System.out.println("Invalid Choice ");
+
+                        } catch (InputMismatchException e) {
+                            s.next();
+                            System.out.println("Invalid Input, please enter a valid number");
                         }
-                        System.out.println("Invalid Choice ");
                     }
 
                     if (failedLoginChoice == 1) {
@@ -246,11 +277,16 @@ public class Main {
                     System.out.println("User already exists");
                     System.out.println("Would you like to login? \n1) Yes\n2) No");
                     while (true) {
-                        failedLoginChoice = s.nextByte();
-                        if (failedLoginChoice == 1 || failedLoginChoice == 2) {
-                            break;
+                        try {
+                            failedLoginChoice = s.nextByte();
+                            if (failedLoginChoice == 1 || failedLoginChoice == 2)
+                                break;
+
+                            System.out.println("Invalid Choice ");
+                        } catch (InputMismatchException e) {
+                            s.next();
+                            System.out.println("Invalid Input, please enter a valid number");
                         }
-                        System.out.println("Invalid Choice ");
                     }
 
                     if (failedLoginChoice == 1) {
@@ -298,11 +334,17 @@ public class Main {
                     System.out.println("Would you like to Sign up? \n1) Yes\n2) No");
 
                     while (true) {
-                        failedLoginChoice = s.nextByte();
-                        if (failedLoginChoice == 1 || failedLoginChoice == 2) {
-                            break;
+                        try {
+                            failedLoginChoice = s.nextByte();
+                            if (failedLoginChoice == 1 || failedLoginChoice == 2)
+                                break;
+
+                            System.out.println("Invalid Choice ");
+
+                        } catch (InputMismatchException e) {
+                            s.next();
+                            System.out.println("Invalid Input, please enter a valid number");
                         }
-                        System.out.println("Invalid Choice ");
                     }
 
                     if (failedLoginChoice == 1) {
@@ -325,11 +367,18 @@ public class Main {
                     System.out.println("User already exists");
                     System.out.println("Would you like to login? \n1) Yes\n2) No");
                     while (true) {
-                        failedLoginChoice = s.nextByte();
-                        if (failedLoginChoice == 1 || failedLoginChoice == 2) {
-                            break;
+                        try {
+                            failedLoginChoice = s.nextByte();
+                            if (failedLoginChoice == 1 || failedLoginChoice == 2)
+                                break;
+
+                            System.out.println("Invalid Choice ");
+
+                        } catch (InputMismatchException e) {
+                            s.next();
+                            System.out.println("Invalid Input, please enter a valid number");
                         }
-                        System.out.println("Invalid Choice ");
+
                     }
 
                     if (failedLoginChoice == 1) {
@@ -359,10 +408,16 @@ public class Main {
 
         byte option;
         while (true) {
-            option = s.nextByte();
-            if (option >= 1 && option <= 4)
-                break;
-            System.out.print("Invalid Input: ");
+            try {
+                option = s.nextByte();
+                if (option >= 1 && option <= 4)
+                    break;
+                System.out.print("Invalid Input: ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
         }
 
         switch (option) {
@@ -387,14 +442,21 @@ public class Main {
         System.out.println("-----------------------------");
         System.out.println("1) Start Ordering ");
         System.out.println("2) Track Order History ");
-        System.out.print("What would you like to do today?");
+        System.out.print("What would you like to do today? ");
 
         byte option;
         while (true) {
-            option = s.nextByte();
-            if (option == 1 || option == 2)
-                break;
-            System.out.print("Invalid Input ");
+            try {
+                option = s.nextByte();
+                if (option == 1 || option == 2)
+                    break;
+                System.out.print("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
+
         }
 
         switch (option) {
@@ -415,10 +477,16 @@ public class Main {
 
         byte option;
         while (true) {
-            option = s.nextByte();
-            if (option >= 1 && option <= 3)
-                break;
-            System.out.print("Invalid Input ");
+            try {
+                option = s.nextByte();
+                if (option >= 1 && option <= 3)
+                    break;
+                System.out.print("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
         }
 
         switch (option) {
@@ -443,10 +511,16 @@ public class Main {
 
         byte option;
         while (true) {
-            option = s.nextByte();
-            if (option >= 1 && option <= 4)
-                break;
-            System.out.print("Invalid Input ");
+            try {
+                option = s.nextByte();
+                if (option >= 1 && option <= 4)
+                    break;
+                System.out.print("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
         }
 
         switch (option) {
@@ -458,10 +532,17 @@ public class Main {
 
                 byte typeOfUser;
                 while (true) {
-                    typeOfUser = s.nextByte();
-                    if (typeOfUser == 1 || typeOfUser == 2)
-                        break;
-                    System.out.print("Invalid Input ");
+                    try {
+                        typeOfUser = s.nextByte();
+                        if (typeOfUser == 1 || typeOfUser == 2)
+                            break;
+                        System.out.print("Invalid Input ");
+
+                    } catch (InputMismatchException e) {
+                        s.next();
+                        System.out.println("Invalid Input, please enter a valid number");
+                    }
+
                 }
 
                 String userName, userPassword;
@@ -505,10 +586,17 @@ public class Main {
 
                 byte userType;
                 while (true) {
-                    userType = s.nextByte();
-                    if (userType == 1 || userType == 2)
-                        break;
-                    System.out.print("Invalid Input ");
+                    try {
+                        userType = s.nextByte();
+                        if (userType == 1 || userType == 2)
+                            break;
+                        System.out.print("Invalid Input ");
+
+                    } catch (InputMismatchException e) {
+                        s.next();
+                        System.out.println("Invalid Input, please enter a valid number");
+                    }
+
                 }
                 s.nextLine();
 
@@ -625,10 +713,17 @@ public class Main {
 
                 byte userType;
                 while (true) {
-                    userType = s.nextByte();
-                    if (userType == 1 || userType == 2)
-                        break;
-                    System.out.print("Invalid Input ");
+                    try {
+                        userType = s.nextByte();
+                        if (userType == 1 || userType == 2)
+                            break;
+                        System.out.print("Invalid Input ");
+
+                    } catch (InputMismatchException e) {
+                        s.next();
+                        System.out.println("Invalid Input, please enter a valid number");
+                    }
+
                 }
                 s.nextLine();
 
@@ -732,10 +827,17 @@ public class Main {
         System.out.println("2) No");
         byte returnOption;
         while (true) {
-            returnOption = s.nextByte();
-            if (returnOption == 1 || returnOption == 2)
-                break;
-            System.out.println("Invalid Input ");
+            try {
+                returnOption = s.nextByte();
+                if (returnOption == 1 || returnOption == 2)
+                    break;
+                System.out.println("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
+
         }
 
         if (returnOption == 1)
@@ -755,10 +857,17 @@ public class Main {
 
         byte option;
         while (true) {
-            option = s.nextByte();
-            if (option >= 1 && option <= 3)
-                break;
-            System.out.println("Invalid Input ");
+            try {
+                option = s.nextByte();
+                if (option >= 1 && option <= 3)
+                    break;
+                System.out.println("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
+
         }
 
         switch (option) {
@@ -832,10 +941,16 @@ public class Main {
         System.out.println("2) No");
         byte returnOption;
         while (true) {
-            returnOption = s.nextByte();
-            if (returnOption == 1 || returnOption == 2)
-                break;
-            System.out.println("Invalid Input ");
+            try {
+                returnOption = s.nextByte();
+                if (returnOption == 1 || returnOption == 2)
+                    break;
+                System.out.println("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
         }
 
         if (returnOption == 1)
@@ -854,10 +969,16 @@ public class Main {
 
         byte option;
         while (true) {
-            option = s.nextByte();
-            if (option >= 1 && option <= 3)
-                break;
-            System.out.print("Invalid Input ");
+            try {
+                option = s.nextByte();
+                if (option >= 1 && option <= 3)
+                    break;
+                System.out.print("Invalid Input ");
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
+
         }
 
 
@@ -932,10 +1053,16 @@ public class Main {
         System.out.println("2) No");
         byte returnOption;
         while (true) {
-            returnOption = s.nextByte();
-            if (returnOption == 1 || returnOption == 2)
-                break;
-            System.out.println("Invalid Input ");
+            try {
+                returnOption = s.nextByte();
+                if (returnOption == 1 || returnOption == 2)
+                    break;
+                System.out.println("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
         }
 
         if (returnOption == 1)
@@ -955,17 +1082,35 @@ public class Main {
 
         byte option;
         while (true) {
-            option = s.nextByte();
-            if (option >= 1 && option <= 3)
-                break;
-            System.out.print("Invalid Input ");
+            try {
+                option = s.nextByte();
+                if (option >= 1 && option <= 3)
+                    break;
+                System.out.print("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
+
         }
 
         switch (option) {
             // View Order details case
             case 1: {
-                System.out.println("Enter the ID of the Order you want to see its details: ");
-                int orderID = s.nextInt();
+                int orderID = -1;
+                while (true) {
+                    try {
+                        System.out.println("Enter the ID of the Order you want to see its details: ");
+                        orderID = s.nextInt();
+                        break;
+                    } catch (InputMismatchException e) {
+                        s.next();
+                        System.out.println("Invalid Input, please enter a valid number");
+                    }
+
+                }
+
                 Order orderNeeded = null;
                 for (Order order : orderArrayList) {
                     if (order.getOrderID() == orderID) {
@@ -1036,10 +1181,16 @@ public class Main {
         System.out.println("2) No");
         byte returnOption;
         while (true) {
-            returnOption = s.nextByte();
-            if (returnOption == 1 || returnOption == 2)
-                break;
-            System.out.println("Invalid Input ");
+            try {
+                returnOption = s.nextByte();
+                if (returnOption == 1 || returnOption == 2)
+                    break;
+                System.out.println("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
         }
 
         if (returnOption == 1)
@@ -1059,10 +1210,16 @@ public class Main {
 
         byte option;
         while (true) {
-            option = s.nextByte();
-            if (option >= 1 && option <= 4)
-                break;
-            System.out.print("Invalid Input ");
+            try {
+                option = s.nextByte();
+                if (option >= 1 && option <= 4)
+                    break;
+                System.out.print("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
         }
 
         switch (option) {
@@ -1179,10 +1336,17 @@ public class Main {
         System.out.println("2) No");
         byte returnOption;
         while (true) {
-            returnOption = s.nextByte();
-            if (returnOption == 1 || returnOption == 2)
-                break;
-            System.out.println("Invalid Input ");
+            try {
+                returnOption = s.nextByte();
+                if (returnOption == 1 || returnOption == 2)
+                    break;
+                System.out.println("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
+
         }
 
         if (returnOption == 1)
@@ -1203,10 +1367,17 @@ public class Main {
 
         byte option;
         while (true) {
-            option = s.nextByte();
-            if (option >= 1 && option <= 3)
-                break;
-            System.out.print("Invalid Input");
+            try {
+                option = s.nextByte();
+                if (option >= 1 && option <= 3)
+                    break;
+                System.out.print("Invalid Input");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
+
         }
 
         s.nextLine();
@@ -1267,10 +1438,17 @@ public class Main {
         
         byte option;
         while (true) {
-            option = s.nextByte();
-            if (option >= 1 && option <= 4)
-                break;
-            System.out.print("Invalid Input ");
+            try {
+                option = s.nextByte();
+                if (option >= 1 && option <= 4)
+                    break;
+                System.out.print("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
+
         }
 
         switch (option) {
@@ -1321,10 +1499,17 @@ public class Main {
 
                     byte orderStatusOption;
                     while (true) {
-                        orderStatusOption = s.nextByte();
-                        if (orderStatusOption >= 1 && orderStatusOption <= 3)
-                            break;
-                        System.out.print("Invalid Input ");
+                        try {
+                            orderStatusOption = s.nextByte();
+                            if (orderStatusOption >= 1 && orderStatusOption <= 3)
+                                break;
+                            System.out.print("Invalid Input ");
+
+                        } catch (InputMismatchException e) {
+                            s.next();
+                            System.out.println("Invalid Input, please enter a valid number");
+                        }
+
                     }
 
                     OrderStatus orderStatus = null;
@@ -1408,10 +1593,17 @@ public class Main {
         System.out.print("Choice: ");
         byte option;
         while (true) {
-            option = s.nextByte();
-            if (option >= 1 && option <= 5)
-                break;
-            System.out.print("Invalid Input ");
+            try {
+                option = s.nextByte();
+                if (option >= 1 && option <= 5)
+                    break;
+                System.out.print("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
+
         }
 
         switch (option) {
@@ -1432,10 +1624,16 @@ public class Main {
 
                     byte sellerOption;
                     while (true) {
-                        sellerOption = s.nextByte();
-                        if (sellerOption >= 1 && sellerOption <= sellerArrayList.size())
-                            break;
-                        System.out.print("Invalid Input ");
+                        try {
+                            sellerOption = s.nextByte();
+                            if (sellerOption >= 1 && sellerOption <= sellerArrayList.size())
+                                break;
+                            System.out.print("Invalid Input ");
+
+                        } catch (InputMismatchException e) {
+                            s.next();
+                            System.out.println("Invalid Input, please enter a valid number");
+                        }
                     }
                     chosenSeller = sellerArrayList.get(sellerOption - 1);
                 }
@@ -1450,19 +1648,34 @@ public class Main {
 
                 while (true) {
                     System.out.println("Enter the product number you want to add to your cart (0 to finish): ");
-                    int productOption = s.nextInt();
-                    if (productOption == 0) {
-                        break; // User chose to finish adding products
+                    int productOption = -1;
+
+                    try {
+                        productOption = s.nextInt();
+                        if (productOption == 0) {
+                            break; // User chose to finish adding products
+                        }
+
+                    } catch (InputMismatchException e) {
+                        s.next();
+                        System.out.println("Invalid Input, please enter a valid number");
                     }
+
 
                     System.out.println("How many of " + chosenSeller.getSellerProducts().get(productOption - 1).getProductName()
                             + " would you like? ");
                     int productQuantity;
                     while (true) {
-                        productQuantity = s.nextInt();
-                        if (productQuantity > 0)
-                            break;
-                        System.out.print("Invalid Input ");
+                        try {
+                            productQuantity = s.nextInt();
+                            if (productQuantity > 0)
+                                break;
+                            System.out.print("Invalid Input ");
+
+                        } catch (InputMismatchException e) {
+                            s.next();
+                            System.out.println("Invalid Input, please enter a valid number");
+                        }
                     }
 
                     if (productOption <= chosenSeller.getSellerProducts().size()){
@@ -1564,11 +1777,18 @@ public class Main {
 
                     String cartConfirmation;
                     while (true) {
-                        cartConfirmation = s.nextLine();
-                        if (cartConfirmation.equalsIgnoreCase("yes") ||
-                                cartConfirmation.equalsIgnoreCase("no"))
-                            break;
-                        System.out.print("Invalid Input ");
+                        try {
+                            cartConfirmation = s.nextLine();
+                            if (cartConfirmation.equalsIgnoreCase("yes") ||
+                                    cartConfirmation.equalsIgnoreCase("no"))
+                                break;
+                            System.out.print("Invalid Input ");
+
+                        } catch (InputMismatchException e) {
+                            s.next();
+                            System.out.println("Invalid Input, please enter a valid number");
+                        }
+
                     }
 
                     if (cartConfirmation.equalsIgnoreCase("yes")) {
@@ -1598,10 +1818,17 @@ public class Main {
         System.out.println("2) No");
         byte returnOption;
         while (true) {
-            returnOption = s.nextByte();
-            if (returnOption == 1 || returnOption == 2)
-                break;
-            System.out.println("Invalid Input ");
+            try {
+                returnOption = s.nextByte();
+                if (returnOption == 1 || returnOption == 2)
+                    break;
+                System.out.println("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
+
         }
 
         if (returnOption == 1)
@@ -1697,10 +1924,17 @@ public class Main {
 
 
                     while (true) {
-                        rating = s.nextInt();
-                        if (rating >= 1 && rating <= 5)
-                            break;
-                        System.out.println("Invalid Input");
+                        try {
+                            rating = s.nextInt();
+                            if (rating >= 1 && rating <= 5)
+                                break;
+                            System.out.println("Invalid Input");
+
+                        } catch (InputMismatchException e) {
+                            s.next();
+                            System.out.println("Invalid Input, please enter a valid number");
+                        }
+
                     }
                     orderToRate.setRate(rating);
                     System.out.println("Rating submitted successfully.");
@@ -1723,10 +1957,17 @@ public class Main {
         System.out.println("2) No");
         byte returnOption;
         while (true) {
-            returnOption = s.nextByte();
-            if (returnOption == 1 || returnOption == 2)
-                break;
-            System.out.println("Invalid Input ");
+            try {
+                returnOption = s.nextByte();
+                if (returnOption == 1 || returnOption == 2)
+                    break;
+                System.out.println("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
+
         }
 
         if (returnOption == 1)

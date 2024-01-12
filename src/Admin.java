@@ -189,6 +189,8 @@ public class Admin extends User implements Serializable {
         System.out.println("Order Status: " + order.getStatus());
         System.out.println("Total Amount: " + order.getTotalPrice());
         System.out.println("Order Date: " + order.getOrderDate());
+        System.out.println("Order Address: " + order.getOrderAddress());
+        System.out.println("Order Rating: " + (order.getRate() == -1 ? "Order yet to be rated" : order.getRate()));
     }
 
     protected double getAverageRevenue(ArrayList<Order> orderList, Date startDate, Date endDate){

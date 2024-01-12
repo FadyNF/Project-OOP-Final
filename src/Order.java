@@ -73,4 +73,15 @@ public class Order implements Serializable {
     public void setRate(int rate) {
         this.rate = rate;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "Order ID: " + this.getOrderID() +
+                ", Order Total Price: " + this.getTotalPrice() +
+                ", Order Address: " + this.getOrderAddress() +
+                ", Order Date: " + this.getOrderDate() +
+                ", Order Status: " + this.getStatus() +
+                "}";
+    }
 }
