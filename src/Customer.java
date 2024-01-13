@@ -15,6 +15,14 @@ public class Customer extends User implements Serializable {
         customerCart = new Cart();
     }
 
+    @Override
+    public String toString(){
+        return "Customer{" +
+                "Customer ID: " + this.getCustomerID() +
+                ", username: " + this.getUserName() +
+                "}";
+    }
+
     public int getCustomerID() {
         return customerID;
     }
@@ -47,14 +55,6 @@ public class Customer extends User implements Serializable {
         this.customerCart = customerCart;
     }
 
-    @Override
-    public String toString(){
-        return "Customer{" +
-                "Customer ID: " + this.getCustomerID() +
-                ", username: " + this.getUserName() +
-                "}";
-    }
-
     public ArrayList<Product> searchProducts(ArrayList<Product> productList,String searchQuery) {
         ArrayList<Product> foundProducts = new ArrayList<>();
         for (Product product : productList) {
@@ -64,36 +64,6 @@ public class Customer extends User implements Serializable {
         }
 
         return foundProducts;
-    }
-
-    public void addProductToCart(Product product, int quantity) {
-        customerCart.addProduct(product, quantity);
-    }
-
-    private void removeProductFromCart(Product product, int quantity) {
-        customerCart.removeProduct(product, quantity);
-    }
-
-    private double calculateTotalPrice() {
-        return customerCart.getTotalPrice();
-    }
-
-    private void clearCart() {
-        customerCart.clearCart();
-    }
-
-    public void rateOrder(Order order, int rating) {
-        order.setRate(rating);
-    }
-
-    public OrderStatus trackOrderStatus(Order order) {
-        return order.getStatus();
-    }
-
-    public void viewOrderHistoryDetails() {
-        for (Order order : customerOrders) {
-            System.out.println(order);
-        }
     }
 
     public double calculateTotalRevenue() {

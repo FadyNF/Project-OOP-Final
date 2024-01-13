@@ -236,16 +236,4 @@ public class Seller extends User implements Serializable {
             }
         }
     }
-
-    protected ArrayList<Product> searchProducts(String searchQuery){
-        ArrayList<Product> foundProducts = new ArrayList<>();
-
-        for (Product product : sellerProducts) {
-            if (product.getProductName().toLowerCase().contains(searchQuery.toLowerCase())) {
-                foundProducts.add(product);
-            }
-        }
-
-        return foundProducts;
-    }
 }

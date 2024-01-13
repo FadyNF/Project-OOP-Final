@@ -963,7 +963,7 @@ public class Main {
 
     public static void adminViewDataOfCustomers(Admin adminLoggedIn) {
         System.out.println("------------------------------");
-        System.out.println("1) Orders per Customer and its details");
+        System.out.println("1) Orders per Customer and his/her details");
         System.out.println("2) Customer with max Orders");
         System.out.println("3) Customer with max Revenue");
 
@@ -1032,6 +1032,7 @@ public class Main {
                 }
             }
             break;
+
             // customer with max revenue case
             case 3: {
                 ArrayList<Customer> customersWithMaxRevenue = adminLoggedIn.getCustomerWithMaxRevenue(customerArrayList);
@@ -1285,7 +1286,7 @@ public class Main {
                         double newProductPrice = s.nextDouble();
                         sellerLoggedIn.editProductPrice(foundProduct, newProductPrice);
 
-                        System.out.println("Product edited successfully: " + foundProduct);
+                        System.out.println("Product edited successfully: " + foundProduct.getProductName());
                     }
 
                 } else {
@@ -1324,9 +1325,7 @@ public class Main {
             // Seller view products case
             case 4: {
                 System.out.println("List of Products:");
-                for (Product product : productArrayList) {
-                    System.out.println(product);
-                }
+                sellerLoggedIn.displayProducts();
             }
             break;
         }
@@ -1419,13 +1418,38 @@ public class Main {
             // View Most Revenue Products over a specific period of time case
             case 3: {
                 ArrayList<Product> mostRevenueProductsOverTime = sellerLoggedIn.mostRevenueProductOverTime(startDate, endDate);
-                System.out.println(sellerLoggedIn.getUserName() + "'s best selling products is/are:- ");
+                System.out.println(sellerLoggedIn.getUserName() + "'s most revenue products is/are:- ");
                 for (Product product : mostRevenueProductsOverTime) {
                     System.out.println("Product ID: " + product.getProductID());
                     System.out.println("Product Name: " + product.getProductName());
                 }
             }
                 break;
+        }
+
+        System.out.println("Return to Seller Menu?");
+        System.out.println("1) Yes");
+        System.out.println("2) No");
+        byte returnOption;
+        while (true) {
+            try {
+                returnOption = s.nextByte();
+                if (returnOption == 1 || returnOption == 2)
+                    break;
+                System.out.println("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
+
+        }
+
+        if (returnOption == 1)
+            sellerMenu(sellerLoggedIn);
+        else {
+            saveArrayLists();
+            System.exit(0);
         }
     }
 
@@ -1565,6 +1589,31 @@ public class Main {
             }
                 break;
 
+        }
+
+        System.out.println("Return to Seller Menu?");
+        System.out.println("1) Yes");
+        System.out.println("2) No");
+        byte returnOption;
+        while (true) {
+            try {
+                returnOption = s.nextByte();
+                if (returnOption == 1 || returnOption == 2)
+                    break;
+                System.out.println("Invalid Input ");
+
+            } catch (InputMismatchException e) {
+                s.next();
+                System.out.println("Invalid Input, please enter a valid number");
+            }
+
+        }
+
+        if (returnOption == 1)
+            sellerMenu(sellerLoggedIn);
+        else {
+            saveArrayLists();
+            System.exit(0);
         }
     }
 

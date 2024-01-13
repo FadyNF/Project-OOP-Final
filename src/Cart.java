@@ -4,12 +4,10 @@ import java.util.HashMap;
 public class Cart implements Serializable {
     private HashMap<Product, Integer> cartProducts;
     private double totalPrice;
-    private boolean cartConfirmation;
 
     public Cart() {
         cartProducts = new HashMap<Product, Integer>();
         totalPrice = 0.0;
-        cartConfirmation = false;
     }
 
     public HashMap<Product, Integer> getCartProducts() {
@@ -28,14 +26,6 @@ public class Cart implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public boolean isCartConfirmation() {
-        return cartConfirmation;
-    }
-
-    public void setCartConfirmation(boolean cartConfirmation) {
-        this.cartConfirmation = cartConfirmation;
-    }
-
     public void addProduct(Product product, int quantity) {
         if (cartProducts.containsKey(product)) {
             cartProducts.put(product, cartProducts.get(product) + quantity);
@@ -44,10 +34,6 @@ public class Cart implements Serializable {
         }
 
         totalPrice += (product.productPrice)*quantity;
-    }
-
-    public boolean containsProduct(Product product) {
-        return cartProducts.containsKey(product);
     }
 
     public void removeProduct(Product product, int quantity){
